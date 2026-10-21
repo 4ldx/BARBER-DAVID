@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Número de WhatsApp del cliente
+  // Número de WhatsApp configurado del cliente
   const TELEFONO_WHATSAPP = "528611265737"; 
 
   const serviceItems = document.querySelectorAll(".service-item");
   const btnReservar = document.getElementById("btnReservar");
 
-  // Selección/deselección interactiva de servicios
+  // Permite seleccionar / deseleccionar servicios al hacer clic
   serviceItems.forEach(item => {
     item.addEventListener("click", () => {
       item.classList.toggle("active");
     });
   });
 
-  // Evento de clic en el botón de reservar
+  // Redirección directa a WhatsApp
   if (btnReservar) {
     btnReservar.addEventListener("click", (e) => {
-      e.preventDefault(); // Evita recargas inesperadas de página
+      e.preventDefault();
 
       const seleccionados = document.querySelectorAll(".service-item.active");
       let mensaje = "¡Hola BARBER HOUSE! Me gustaría agendar una cita";
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (seleccionados.length > 0) {
         const listaServicios = Array.from(seleccionados)
           .map(item => item.getAttribute("data-service"))
-          .filter(Boolean) // Evita valores nulos si falta algún atributo data-service
+          .filter(Boolean)
           .join(", ");
         
         mensaje += ` para: *${listaServicios}*.`;
@@ -31,11 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
         mensaje += `. ¿Qué horarios tienen disponibles?`;
       }
 
-      // Redirección directa y segura compatible con móviles
+      // Redirección directa para garantizar compatibilidad móvil y de escritorio
       const urlWhatsApp = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
       window.location.href = urlWhatsApp;
     });
-  } else {
-    console.error("El botón con id 'btnReservar' no fue encontrado en el HTML.");
   }
 });
