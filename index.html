@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Barber House - Barbería y Estilo. Cortes clásicos, barba, fade y diseños. Reserva tu cita online.">
-  <meta name="theme-color" content="#0a0a0a">
-  <title>BARBER HOUSE | Barbería y Estilo</title>
+  <title>BARBER HOUSE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -16,37 +14,39 @@
 
   <!-- Encabezado -->
   <header class="site-header">
-    <div class="header-container">
+    <div class="header-inner">
       <a href="#home" class="brand">BARBER HOUSE</a>
       <nav class="nav-menu">
         <a href="#home">Inicio</a>
-        <a href="#servicios">Servicios</a>
+        <a href="#servicios">Servicies</a>
         <a href="#reservar">Reservar</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
+    <div class="red-line"></div>
   </header>
 
   <main>
-    <!-- Hero / Inicio -->
-    <section class="hero-section" id="home">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
       <div class="hero-content">
         <h1>DÍA DE CORTE</h1>
         <p class="hero-subtitle">BARBERÍA Y ESTILO</p>
       </div>
+      <div class="red-line"></div>
     </section>
 
     <!-- Sección de Servicios -->
     <section class="services-section" id="servicios">
-      <div class="section-title-wrap">
-        <h2>Nuestros Servicios</h2>
+      <div class="divider-title">
+        <span>Nuestros Servicios</span>
       </div>
 
-      <div class="services-grid">
-        <!-- Servicio 1: Corte -->
-        <div class="service-card" data-service="Corte de Cabello" data-price="200">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <div class="services-row">
+        <!-- Corte -->
+        <div class="service-item" data-service="Corte">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="6" cy="6" r="3"/>
               <circle cx="6" cy="18" r="3"/>
               <line x1="20" y1="4" x2="8.12" y2="15.88"/>
@@ -54,66 +54,47 @@
               <line x1="8.12" y1="8.12" x2="12" y2="12"/>
             </svg>
           </div>
-          <h3>Corte</h3>
+          <p class="service-name">Corte</p>
         </div>
 
-        <!-- Servicio 2: Barba -->
-        <div class="service-card" data-service="Afilado y Perfilado de Barba" data-price="150">
-          <div class="icon-wrap">
+        <!-- Barba -->
+        <div class="service-item" data-service="Barba">
+          <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2a5 5 0 00-5 5v3a5 5 0 0010 0V7a5 5 0 00-5-2zm-3 8V7a3 3 0 016 0v3a3 3 0 01-6 0z"/>
               <path d="M12 13a7 7 0 01-7-7 1 1 0 00-2 0 9 9 0 009 9 9 9 0 009-9 1 1 0 00-2 0 7 7 0 01-7 7z"/>
             </svg>
           </div>
-          <h3>Barba</h3>
+          <p class="service-name">Barba</p>
         </div>
 
-        <!-- Servicio 3: Fade -->
-        <div class="service-card" data-service="Corte Fade / Desvanecido" data-price="220">
-          <div class="icon-wrap">
+        <!-- Fade -->
+        <div class="service-item" data-service="Fade">
+          <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4a1 1 0 001.25 1.25l1.79-.62A8.94 8.94 0 0012 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16a7 7 0 110-14 7 7 0 010 14z"/>
             </svg>
           </div>
-          <h3>Fade</h3>
+          <p class="service-name">Fade</p>
         </div>
 
-        <!-- Servicio 4: Diseño -->
-        <div class="service-card" data-service="Diseño / Sombreado Especial" data-price="100">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+        <!-- Diseño -->
+        <div class="service-item" data-service="Diseño">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42-7.09 7.09c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0l7.09-7.09 1.42 1.42 1.41-1.41-1.91-1.93 3.12-3.12c.4-.39.4-1.03 0-1.42z"/>
             </svg>
           </div>
-          <h3>Diseño</h3>
+          <p class="service-name">Diseño</p>
         </div>
       </div>
 
-      <!-- Botón principal de Reserva -->
-      <div class="booking-wrap" id="reservar">
-        <button type="button" class="btn-primary" id="btnReservar">Reservar cita</button>
-      </div>
-    </section>
-
-    <!-- Información de Contacto Básica -->
-    <section class="contact-section" id="contacto">
-      <div class="contact-container">
-        <div class="contact-block">
-          <h4>Ubicación</h4>
-          <p>Av. Principal #123, Col. Centro</p>
-        </div>
-        <div class="contact-block">
-          <h4>Horario</h4>
-          <p>Lunes a Sábado: 10:00 AM - 8:00 PM</p>
-        </div>
+      <!-- Botón de Reserva -->
+      <div class="cta-wrap" id="reservar">
+        <button type="button" class="btn-red" id="btnReservar">Reservar cita</button>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; <span id="year"></span> BARBER HOUSE. Todos los derechos reservados.</p>
-  </footer>
-
 </body>
-</html>
 </html>
