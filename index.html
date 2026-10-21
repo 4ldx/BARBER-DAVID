@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -88,12 +87,53 @@
           <p class="service-name">Diseño</p>
         </div>
       </div>
-<!-- Botón de Reserva limpio -->
-<div class="cta-wrap" id="reservar">
-  <button type="button" class="btn-red" id="btnReservar">Reservar cita</button>
-</div>
+
+      <!-- Botón de Reserva -->
+      <div class="cta-wrap" id="reservar">
+        <button type="button" class="btn-red" id="btnReservar">Reservar cita</button>
+      </div>
     </section>
   </main>
 
+  <!-- Script integrado directamente para evitar errores 404 en Workers -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const TELEFONO_WHATSAPP = "528611265737"; 
+      const serviceItems = document.querySelectorAll(".service-item");
+      const btnReservar = document.getElementById("btnReservar");
+
+      // Selección y deselección visual de servicios
+      serviceItems.forEach(item => {
+        item.addEventListener("click", () => {
+          item.classList.toggle("active");
+        });
+      });
+
+      // Evento de clic en el botón de reservar
+      if (btnReservar) {
+        btnReservar.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          const seleccionados = document.querySelectorAll(".service-item.active");
+          let mensaje = "¡Hola BARBER HOUSE! Me gustaría agendar una cita";
+
+          if (seleccionados.length > 0) {
+            const listaServicios = Array.from(seleccionados)
+              .map(item => item.getAttribute("data-service"))
+              .filter(Boolean)
+              .join(", ");
+            
+            mensaje += ` para: *${listaServicios}*.`;
+          } else {
+            mensaje += `. ¿Qué horarios tienen disponibles?`;
+          }
+
+          // Enlace seguro con la API web oficial de WhatsApp
+          const urlWhatsApp = `https://api.whatsapp.com/send?phone=${TELEFONO_WHATSAPP}&text=${encodeURIComponent(mensaje)}`;
+          window.open(urlWhatsApp, "_blank");
+        });
+      }
+    });
+  </script>
 </body>
 </html>
