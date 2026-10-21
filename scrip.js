@@ -1,36 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Número de WhatsApp del cliente (reemplazar con el real)
-  const TELEFONO_WHATSAPP = "5218710000000"; 
+  // Número de WhatsApp del cliente
+  const TELEFONO_WHATSAPP = "528611265737"; 
 
-  const serviceCards = document.querySelectorAll(".service-card");
+  const serviceItems = document.querySelectorAll(".service-item");
   const btnReservar = document.getElementById("btnReservar");
-  const yearSpan = document.getElementById("year");
 
-  // Colocar año actual en el footer
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
-
-  // Permite seleccionar / deseleccionar servicios haciendo clic
-  serviceCards.forEach(card => {
-    card.addEventListener("click", () => {
-      card.classList.toggle("selected");
+  // Permite seleccionar servicios
+  serviceItems.forEach(item => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("active");
     });
   });
 
-  // Evento para enviar mensaje por WhatsApp
+  // Redirección a WhatsApp al hacer clic en el botón
   if (btnReservar) {
     btnReservar.addEventListener("click", () => {
-      const seleccionados = document.querySelectorAll(".service-card.selected");
+      const seleccionados = document.querySelectorAll(".service-item.active");
       
       let mensaje = "¡Hola BARBER HOUSE! Me gustaría agendar una cita";
 
       if (seleccionados.length > 0) {
         const listaServicios = Array.from(seleccionados)
-          .map(card => card.getAttribute("data-service"))
+          .map(item => item.getAttribute("data-service"))
           .join(", ");
         
-        mensaje += ` para los siguientes servicios: *${listaServicios}*.`;
+        mensaje += ` para: *${listaServicios}*.`;
       } else {
         mensaje += `. ¿Qué horarios tienen disponibles?`;
       }
