@@ -4,7 +4,7 @@ window.enviarWhatsApp = function() {
   
   // Buscar los servicios seleccionados
   const seleccionados = document.querySelectorAll(".service-item.active");
-  let mensaje = "¡Hola BARBER HOUSE! Me gustaría agendar una cita";
+  let mensaje = "Me gustaría agendar una cita";
 
   if (seleccionados.length > 0) {
     const listaServicios = Array.from(seleccionados)
