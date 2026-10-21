@@ -1,272 +1,218 @@
-:root {
-  --bg-color: #080808;
-  --panel-bg: #111111;
-  --text-main: #ffffff;
-  --text-muted: #888888;
-  --accent-red: #c81d25;
-  --accent-red-hover: #e62029;
-  --line-color: #a81c20;
-  --font-heading: "Oswald", sans-serif;
-  --font-body: "Montserrat", sans-serif;
-  --max-width: 1000px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 70px;
+body {
+  background-color: #050505;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  font-family: var(--font-body);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+/* Líneas rojas divisorias de borde a borde */
+.red-line {
+  width: 100%;
+  height: 1px;
+  background-color: #a81c1c;
 }
 
 /* Header */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: rgba(8, 8, 8, 0.95);
-  backdrop-filter: blur(8px);
-  border-bottom: 2px solid var(--line-color);
+  width: 100%;
+  background-color: #070707;
 }
 
-.header-container {
-  max-width: var(--max-width);
+.header-inner {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 18px 24px;
+  padding: 22px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .brand {
-  font-family: var(--font-heading);
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--text-main);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ffffff;
   text-decoration: none;
   text-transform: uppercase;
 }
 
 .nav-menu {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .nav-menu a {
-  color: var(--text-main);
+  color: #d1d1d1;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   transition: color 0.2s ease;
 }
 
 .nav-menu a:hover {
-  color: var(--accent-red);
+  color: #ffffff;
 }
 
 /* Hero Section */
-.hero-section {
-  padding: 80px 20px 60px;
+.hero {
+  width: 100%;
+  background: radial-gradient(ellipse at center, #1b1c1e 0%, #08080a 70%);
   text-align: center;
-  border-bottom: 2px solid var(--line-color);
-  background: radial-gradient(circle at center, #181818 0%, #080808 100%);
+}
+
+.hero-content {
+  padding: 85px 20px 75px;
 }
 
 .hero-content h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(42px, 7vw, 72px);
-  font-weight: 700;
-  letter-spacing: 3px;
+  font-size: clamp(38px, 5.5vw, 64px);
+  font-weight: 800;
+  letter-spacing: 2px;
   line-height: 1.1;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 
 .hero-subtitle {
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 500;
   letter-spacing: 6px;
-  color: var(--text-muted);
+  color: #888888;
   text-transform: uppercase;
 }
 
-/* Services Section */
+/* Sección de Servicios */
 .services-section {
-  max-width: var(--max-width);
+  max-width: 900px;
   margin: 0 auto;
-  padding: 60px 24px;
-}
-
-.section-title-wrap {
-  position: relative;
+  padding: 50px 20px 70px;
   text-align: center;
-  margin-bottom: 50px;
 }
 
-.section-title-wrap::before {
+/* Título con línea gris de fondo */
+.divider-title {
+  position: relative;
+  margin-bottom: 55px;
+}
+
+.divider-title::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
   height: 1px;
-  background: #333333;
+  background: #2a2a2a;
   z-index: 1;
 }
 
-.section-title-wrap h2 {
+.divider-title span {
   position: relative;
-  display: inline-block;
-  background-color: var(--bg-color);
-  padding: 0 20px;
   z-index: 2;
-  font-family: var(--font-body);
-  font-size: 22px;
+  background-color: #050505;
+  padding: 0 25px;
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing: 1px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
 }
 
-/* Grid de Servicios */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 45px;
+/* Fila de Servicios (Fondo transparente/oscuro puro) */
+.services-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 75px;
+  margin-bottom: 55px;
 }
 
-.service-card {
-  background-color: var(--panel-bg);
-  border: 1px solid #222222;
-  border-radius: 4px;
-  padding: 30px 15px;
-  text-align: center;
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.service-card:hover, .service-card.selected {
-  border-color: var(--accent-red);
-  transform: translateY(-4px);
-  background-color: #161616;
+.service-item:hover, .service-item.active {
+  transform: translateY(-3px);
 }
 
-.icon-wrap {
-  width: 50px;
-  height: 50px;
-  margin: 0 auto 16px;
-  color: var(--text-main);
+.service-icon {
+  width: 58px;
+  height: 58px;
+  color: #ffffff;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.service-card.selected .icon-wrap {
-  color: var(--accent-red);
+.service-item.active .service-icon {
+  color: #bd2424;
 }
 
-.icon-wrap svg {
+.service-icon svg {
   width: 100%;
   height: 100%;
 }
 
-.service-card h3 {
-  font-size: 16px;
+.service-name {
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: 1px;
+  color: #e0e0e0;
+  letter-spacing: 0.5px;
 }
 
-/* Booking Button */
-.booking-wrap {
-  text-align: center;
+/* Botón de Reserva */
+.cta-wrap {
+  display: flex;
+  justify-content: center;
 }
 
-.btn-primary {
-  display: inline-block;
-  width: 100%;
-  max-width: 320px;
-  background-color: var(--accent-red);
-  color: var(--text-main);
+.btn-red {
+  background-color: #bd2424;
+  color: #ffffff;
   border: none;
-  border-radius: 3px;
-  padding: 16px 24px;
-  font-family: var(--font-body);
-  font-size: 16px;
+  border-radius: 2px;
+  padding: 14px 48px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.btn-primary:hover {
-  background-color: var(--accent-red-hover);
+.btn-red:hover {
+  background-color: #d62b2b;
   transform: translateY(-2px);
 }
 
-/* Contact & Footer */
-.contact-section {
-  border-top: 1px solid #1f1f1f;
-  background-color: var(--panel-bg);
-  padding: 40px 24px;
-}
-
-.contact-container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  gap: 20px;
-}
-
-.contact-block h4 {
-  font-size: 14px;
-  letter-spacing: 2px;
-  color: var(--accent-red);
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.contact-block p {
-  color: var(--text-muted);
-  font-size: 13px;
-}
-
-.site-footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 11px;
-  color: #555555;
-  border-top: 1px solid #141414;
-}
-
-/* Responsivo para móviles */
+/* Adaptación a dispositivos móviles */
 @media (max-width: 768px) {
-  .header-container {
+  .header-inner {
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
   }
 
   .nav-menu {
-    gap: 16px;
+    gap: 18px;
   }
 
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+  .services-row {
+    gap: 30px;
+    flex-wrap: wrap;
   }
 
-  .contact-container {
-    flex-direction: column;
-    gap: 24px;
+  .service-item {
+    flex: 0 0 40%;
   }
 }
