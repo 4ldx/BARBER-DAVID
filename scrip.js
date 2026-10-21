@@ -1,5 +1,5 @@
-// Función global directa para el botón
-window.hacerReserva = function() {
+// Función global directa para el botón de reserva
+window.enviarWhatsApp = function() {
   const TELEFONO_WHATSAPP = "528611265737";
   
   // Buscar los servicios seleccionados
@@ -17,11 +17,12 @@ window.hacerReserva = function() {
     mensaje += `. ¿Qué horarios tienen disponibles?`;
   }
 
+  // URL directa de la API web de WhatsApp para evitar bloqueos de protocolo o de app de escritorio
   const urlWhatsApp = `https://api.whatsapp.com/send?phone=${TELEFONO_WHATSAPP}&text=${encodeURIComponent(mensaje)}`;
   window.open(urlWhatsApp, "_blank");
 };
 
-// Mantener la selección visual de los servicios
+// Selección visual de los servicios al hacer clic
 document.addEventListener("DOMContentLoaded", () => {
   const serviceItems = document.querySelectorAll(".service-item");
   serviceItems.forEach(item => {
