@@ -3,20 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BARBER HOUSE</title>
+  <title>BARBER HOUSE — Revista & Estilo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-dark: #0e0e11;
-      --bg-card: #16161b;
+      --bg-dark: #0c0c0f;
+      --bg-card: #141419;
+      --bg-card-hover: #1b1b22;
       --text-light: #f8fafc;
       --text-muted: #94a3b8;
       --accent-red: #e11d48;
-      --corner-size: 16px;
+      --accent-gold: #eab308;
+      --corner-size: 18px;
       --corner-thickness: 2.5px;
+      --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     * {
@@ -25,25 +28,31 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: "Montserrat", sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-light);
-      line-height: 1.5;
+      line-height: 1.55;
+      overflow-x: hidden;
     }
 
+    /* Encabezado editorial */
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(14, 14, 17, 0.94);
-      backdrop-filter: blur(8px);
+      z-index: 30;
+      background: rgba(12, 12, 15, 0.92);
+      backdrop-filter: blur(10px);
     }
 
     .header-inner {
-      max-width: 1140px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 1rem 1.5rem;
+      padding: 1.05rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -55,86 +64,154 @@
       color: var(--text-light);
       text-decoration: none;
       font-weight: 800;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       font-size: 1.15rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent-gold);
+      border: 1px solid rgba(234, 179, 8, 0.4);
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+      text-transform: uppercase;
     }
 
     .nav-menu {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.6rem;
       flex-wrap: wrap;
     }
 
     .nav-menu a {
+      position: relative;
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      transition: color 0.25s var(--ease-editorial);
+    }
+
+    .nav-menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--accent-red);
+      transition: width 0.3s var(--ease-editorial);
     }
 
     .nav-menu a:hover {
       color: var(--text-light);
     }
 
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
     .red-line {
       height: 2px;
       width: 100%;
-      background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+      background: linear-gradient(90deg, transparent, var(--accent-red) 35%, var(--accent-red) 65%, transparent);
     }
 
+    /* Portada tipo revista */
     .hero {
       padding: 4.5rem 1.5rem 0;
       text-align: center;
+      position: relative;
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 860px;
       margin: 0 auto 3.5rem;
+      animation: fadeUpEditorial 0.8s var(--ease-editorial) both;
+    }
+
+    .issue-kicker {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-bottom: 0.85rem;
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
       font-weight: 800;
       letter-spacing: 3px;
-      margin-bottom: 0.5rem;
+      line-height: 1.08;
+      margin-bottom: 0.75rem;
     }
 
     .hero-subtitle {
       color: var(--text-muted);
-      letter-spacing: 4px;
-      font-size: 0.95rem;
+      letter-spacing: 4.5px;
+      font-size: 0.92rem;
       font-weight: 600;
     }
 
+    @keyframes fadeUpEditorial {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* =====================================================
-       CATÁLOGO DINÁMICO CON ESQUINAS SOBRESALIENTES
+       CATÁLOGO EDITORIAL CON ESQUINAS ANIMADAS
     ===================================================== */
     .services-section {
-      max-width: 1140px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 4.5rem;
+      padding: 3.75rem 1.5rem 4.75rem;
     }
 
     .divider-title {
-      text-align: center;
-      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .divider-title::before,
+    .divider-title::after {
+      content: "";
+      flex: 1;
+      max-width: 180px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.14);
     }
 
     .divider-title span {
       display: inline-block;
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.45rem;
       border-bottom: 2px solid var(--accent-red);
     }
 
     .services-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 2rem;
       padding: 0.5rem;
     }
 
@@ -142,55 +219,49 @@
       position: relative;
       background: var(--bg-card);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 6px;
-      padding: 2rem 1.25rem;
+      border-radius: 4px;
+      padding: 2.15rem 1.35rem 1.85rem;
       text-align: center;
       cursor: pointer;
       user-select: none;
-      transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      transition:
+        transform 0.35s var(--ease-editorial),
+        background-color 0.3s var(--ease-editorial),
+        border-color 0.3s var(--ease-editorial),
+        box-shadow 0.35s var(--ease-editorial);
     }
 
-    /* Esquinas superior izquierda y superior derecha */
-    .service-item::before {
-      content: "";
+    .service-folio {
       position: absolute;
-      inset: -4px;
-      pointer-events: none;
-      border-top: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
-      border-right: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
-      border-top-right-radius: 8px;
-      clip-path: polygon(
-        calc(100% - var(--corner-size)) 0,
-        100% 0,
-        100% var(--corner-size),
-        calc(100% - var(--corner-thickness)) var(--corner-size),
-        calc(100% - var(--corner-thickness)) var(--corner-thickness),
-        calc(100% - var(--corner-size)) var(--corner-thickness)
-      );
-      transition: inset 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+      top: 10px;
+      left: 14px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: rgba(148, 163, 184, 0.65);
+      transition: color 0.25s var(--ease-editorial);
     }
 
-    /* Esquinas inferior izquierda y inferior derecha */
-    .service-item::after {
-      content: "";
+    .service-status {
       position: absolute;
-      inset: -4px;
-      pointer-events: none;
-      border-bottom: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
-      border-left: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
-      border-bottom-left-radius: 8px;
-      clip-path: polygon(
-        0 calc(100% - var(--corner-size)),
-        var(--corner-thickness) calc(100% - var(--corner-size)),
-        var(--corner-thickness) calc(100% - var(--corner-thickness)),
-        var(--corner-size) calc(100% - var(--corner-thickness)),
-        var(--corner-size) 100%,
-        0 100%
-      );
-      transition: inset 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+      top: 10px;
+      right: 14px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      opacity: 0;
+      transform: translateY(-3px);
+      transition: opacity 0.25s var(--ease-editorial), transform 0.25s var(--ease-editorial);
     }
 
-    /* Hacemos visibles las 4 esquinas completas con marcos de esquina dedicados */
+    .service-item.active .service-status {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 4 Esquinas editoriales sobresalientes */
     .corner-tl,
     .corner-tr,
     .corner-bl,
@@ -199,108 +270,123 @@
       width: var(--corner-size);
       height: var(--corner-size);
       pointer-events: none;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      transition:
+        transform 0.35s var(--ease-editorial),
+        border-color 0.3s var(--ease-editorial),
+        width 0.3s var(--ease-editorial),
+        height 0.3s var(--ease-editorial);
     }
 
     .corner-tl {
-      top: -5px;
-      left: -5px;
+      top: -4px;
+      left: -4px;
       border-top: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
       border-left: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
     }
 
     .corner-tr {
-      top: -5px;
-      right: -5px;
+      top: -4px;
+      right: -4px;
       border-top: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
       border-right: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
     }
 
     .corner-bl {
-      bottom: -5px;
-      left: -5px;
+      bottom: -4px;
+      left: -4px;
       border-bottom: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
       border-left: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
     }
 
     .corner-br {
-      bottom: -5px;
-      right: -5px;
+      bottom: -4px;
+      right: -4px;
       border-bottom: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
       border-right: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
     }
 
     .service-item:hover {
-      transform: translateY(-4px);
-      background: #1d1d24;
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
       border-color: rgba(225, 29, 72, 0.45);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.45);
+    }
+
+    .service-item:hover .service-folio,
+    .service-item.active .service-folio {
+      color: var(--accent-gold);
     }
 
     .service-item:hover .corner-tl,
     .service-item.active .corner-tl {
-      transform: translate(-4px, -4px) scale(1.12);
+      transform: translate(-7px, -7px);
+      width: 22px;
+      height: 22px;
       border-color: var(--accent-red);
     }
 
     .service-item:hover .corner-tr,
     .service-item.active .corner-tr {
-      transform: translate(4px, -4px) scale(1.12);
+      transform: translate(7px, -7px);
+      width: 22px;
+      height: 22px;
       border-color: var(--accent-red);
     }
 
     .service-item:hover .corner-bl,
     .service-item.active .corner-bl {
-      transform: translate(-4px, 4px) scale(1.12);
+      transform: translate(-7px, 7px);
+      width: 22px;
+      height: 22px;
       border-color: var(--accent-red);
     }
 
     .service-item:hover .corner-br,
     .service-item.active .corner-br {
-      transform: translate(4px, 4px) scale(1.12);
+      transform: translate(7px, 7px);
+      width: 22px;
+      height: 22px;
       border-color: var(--accent-red);
     }
 
     .service-item.active {
-      background: #22141b;
+      background: #201219;
       border-color: var(--accent-red);
-      box-shadow: 0 0 0 1px rgba(225, 29, 72, 0.35), 0 14px 28px rgba(225, 29, 72, 0.16);
+      box-shadow:
+        0 0 0 1px rgba(225, 29, 72, 0.4),
+        0 18px 36px rgba(225, 29, 72, 0.18);
     }
 
     .service-icon {
       width: 48px;
       height: 48px;
-      margin: 0 auto 1rem;
+      margin: 0.35rem auto 1.05rem;
       color: var(--text-light);
-      transition: transform 0.25s ease, color 0.25s ease;
+      transition: transform 0.35s var(--ease-editorial), color 0.3s var(--ease-editorial);
     }
 
     .service-item:hover .service-icon,
     .service-item.active .service-icon {
       color: #fb7185;
-      transform: scale(1.06);
+      transform: scale(1.08);
     }
 
     .service-name {
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.8px;
+      font-weight: 800;
+      font-size: 1.02rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
     }
 
-    .service-page-link {
-      display: inline-block;
-      margin-top: 0.65rem;
-      font-size: 0.75rem;
+    .service-sub {
+      font-size: 0.76rem;
       color: var(--text-muted);
-      text-decoration: underline;
-    }
-
-    .service-page-link:hover {
-      color: #ffffff;
+      letter-spacing: 0.4px;
     }
 
     .cta-wrap {
-      margin-top: 2.75rem;
+      margin-top: 3rem;
       text-align: center;
     }
 
@@ -308,20 +394,25 @@
       background-color: var(--accent-red);
       color: #ffffff;
       border: none;
-      padding: 0.9rem 2.25rem;
+      padding: 0.95rem 2.4rem;
       font-family: inherit;
       font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
+      font-size: 0.92rem;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 8px 22px rgba(225, 29, 72, 0.25);
+      transition:
+        background-color 0.25s var(--ease-editorial),
+        transform 0.25s var(--ease-editorial),
+        box-shadow 0.25s var(--ease-editorial);
     }
 
     .btn-red:hover {
       background-color: #be123c;
       transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(225, 29, 72, 0.38);
     }
   </style>
 </head>
@@ -330,10 +421,13 @@
   <!-- Encabezado -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="#home" class="brand">BARBER HOUSE</a>
+      <a href="#home" class="brand">
+        BARBER HOUSE
+        <span class="brand-tag">Edición Estilo</span>
+      </a>
       <nav class="nav-menu">
         <a href="#home">Inicio</a>
-        <a href="#servicios">Servicies</a>
+        <a href="#servicios">Servicios</a>
         <a href="#reservar">Reservar</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -345,6 +439,7 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-content">
+        <span class="issue-kicker">Catálogo Editorial · Barbería</span>
         <h1>DÍA DE CORTE</h1>
         <p class="hero-subtitle">BARBERÍA Y ESTILO</p>
       </div>
@@ -360,6 +455,8 @@
       <div class="services-row">
         <!-- Corte -->
         <div class="service-item" data-service="Corte" data-page="corte.html">
+          <span class="service-folio">01</span>
+          <span class="service-status">Elegido</span>
           <span class="corner-tl" aria-hidden="true"></span>
           <span class="corner-tr" aria-hidden="true"></span>
           <span class="corner-bl" aria-hidden="true"></span>
@@ -374,10 +471,13 @@
             </svg>
           </div>
           <p class="service-name">Corte</p>
+          <p class="service-sub">Clásico o contemporáneo</p>
         </div>
 
         <!-- Barba -->
         <div class="service-item" data-service="Barba" data-page="barba.html">
+          <span class="service-folio">02</span>
+          <span class="service-status">Elegido</span>
           <span class="corner-tl" aria-hidden="true"></span>
           <span class="corner-tr" aria-hidden="true"></span>
           <span class="corner-bl" aria-hidden="true"></span>
@@ -389,10 +489,13 @@
             </svg>
           </div>
           <p class="service-name">Barba</p>
+          <p class="service-sub">Perfilado y ritual</p>
         </div>
 
         <!-- Fade -->
         <div class="service-item" data-service="Fade" data-page="fade.html">
+          <span class="service-folio">03</span>
+          <span class="service-status">Elegido</span>
           <span class="corner-tl" aria-hidden="true"></span>
           <span class="corner-tr" aria-hidden="true"></span>
           <span class="corner-bl" aria-hidden="true"></span>
@@ -403,10 +506,13 @@
             </svg>
           </div>
           <p class="service-name">Fade</p>
+          <p class="service-sub">Degradado limpio y preciso</p>
         </div>
 
         <!-- Diseño -->
         <div class="service-item" data-service="Diseño" data-page="diseno.html">
+          <span class="service-folio">04</span>
+          <span class="service-status">Elegido</span>
           <span class="corner-tl" aria-hidden="true"></span>
           <span class="corner-tr" aria-hidden="true"></span>
           <span class="corner-bl" aria-hidden="true"></span>
@@ -417,6 +523,7 @@
             </svg>
           </div>
           <p class="service-name">Diseño</p>
+          <p class="service-sub">Trazo y detalle de autor</p>
         </div>
       </div>
 
@@ -430,11 +537,11 @@
   <!-- Script integrado directamente para evitar errores 404 en Workers -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const TELEFONO_WHATSAPP = "528611265737"; 
+      const TELEFONO_WHATSAPP = "528611265737";
       const serviceItems = document.querySelectorAll(".service-item");
       const btnReservar = document.getElementById("btnReservar");
 
-      // Selección y deselección visual de servicios con esquinas marcadas
+      // Selección y deselección visual de servicios con esquinas animadas
       serviceItems.forEach(item => {
         item.addEventListener("click", () => {
           item.classList.toggle("active");
@@ -454,7 +561,7 @@
               .map(item => item.getAttribute("data-service"))
               .filter(Boolean)
               .join(", ");
-            
+
             mensaje += ` para: *${listaServicios}*.`;
           } else {
             mensaje += `. ¿Qué horarios tienen disponibles?`;
