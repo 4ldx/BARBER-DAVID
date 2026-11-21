@@ -7,7 +7,323 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      --bg-dark: #0e0e11;
+      --bg-card: #16161b;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-red: #e11d48;
+      --corner-size: 16px;
+      --corner-thickness: 2.5px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(14, 14, 17, 0.94);
+      backdrop-filter: blur(8px);
+    }
+
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 2px;
+      font-size: 1.15rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--text-light);
+    }
+
+    .red-line {
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+    }
+
+    .hero {
+      padding: 4.5rem 1.5rem 0;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      letter-spacing: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* =====================================================
+       CATÁLOGO DINÁMICO CON ESQUINAS SOBRESALIENTES
+    ===================================================== */
+    .services-section {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 4.5rem;
+    }
+
+    .divider-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider-title span {
+      display: inline-block;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent-red);
+    }
+
+    .services-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.75rem;
+      padding: 0.5rem;
+    }
+
+    .service-item {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 2rem 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* Esquinas superior izquierda y superior derecha */
+    .service-item::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      pointer-events: none;
+      border-top: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
+      border-right: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
+      border-top-right-radius: 8px;
+      clip-path: polygon(
+        calc(100% - var(--corner-size)) 0,
+        100% 0,
+        100% var(--corner-size),
+        calc(100% - var(--corner-thickness)) var(--corner-size),
+        calc(100% - var(--corner-thickness)) var(--corner-thickness),
+        calc(100% - var(--corner-size)) var(--corner-thickness)
+      );
+      transition: inset 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+    }
+
+    /* Esquinas inferior izquierda y inferior derecha */
+    .service-item::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      pointer-events: none;
+      border-bottom: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
+      border-left: var(--corner-thickness) solid rgba(255, 255, 255, 0.35);
+      border-bottom-left-radius: 8px;
+      clip-path: polygon(
+        0 calc(100% - var(--corner-size)),
+        var(--corner-thickness) calc(100% - var(--corner-size)),
+        var(--corner-thickness) calc(100% - var(--corner-thickness)),
+        var(--corner-size) calc(100% - var(--corner-thickness)),
+        var(--corner-size) 100%,
+        0 100%
+      );
+      transition: inset 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+    }
+
+    /* Hacemos visibles las 4 esquinas completas con marcos de esquina dedicados */
+    .corner-tl,
+    .corner-tr,
+    .corner-bl,
+    .corner-br {
+      position: absolute;
+      width: var(--corner-size);
+      height: var(--corner-size);
+      pointer-events: none;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .corner-tl {
+      top: -5px;
+      left: -5px;
+      border-top: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+      border-left: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+    }
+
+    .corner-tr {
+      top: -5px;
+      right: -5px;
+      border-top: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+      border-right: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+    }
+
+    .corner-bl {
+      bottom: -5px;
+      left: -5px;
+      border-bottom: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+      border-left: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+    }
+
+    .corner-br {
+      bottom: -5px;
+      right: -5px;
+      border-bottom: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+      border-right: var(--corner-thickness) solid rgba(255, 255, 255, 0.55);
+    }
+
+    .service-item:hover {
+      transform: translateY(-4px);
+      background: #1d1d24;
+      border-color: rgba(225, 29, 72, 0.45);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .service-item:hover .corner-tl,
+    .service-item.active .corner-tl {
+      transform: translate(-4px, -4px) scale(1.12);
+      border-color: var(--accent-red);
+    }
+
+    .service-item:hover .corner-tr,
+    .service-item.active .corner-tr {
+      transform: translate(4px, -4px) scale(1.12);
+      border-color: var(--accent-red);
+    }
+
+    .service-item:hover .corner-bl,
+    .service-item.active .corner-bl {
+      transform: translate(-4px, 4px) scale(1.12);
+      border-color: var(--accent-red);
+    }
+
+    .service-item:hover .corner-br,
+    .service-item.active .corner-br {
+      transform: translate(4px, 4px) scale(1.12);
+      border-color: var(--accent-red);
+    }
+
+    .service-item.active {
+      background: #22141b;
+      border-color: var(--accent-red);
+      box-shadow: 0 0 0 1px rgba(225, 29, 72, 0.35), 0 14px 28px rgba(225, 29, 72, 0.16);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1rem;
+      color: var(--text-light);
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .service-item:hover .service-icon,
+    .service-item.active .service-icon {
+      color: #fb7185;
+      transform: scale(1.06);
+    }
+
+    .service-name {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.8px;
+    }
+
+    .service-page-link {
+      display: inline-block;
+      margin-top: 0.65rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: underline;
+    }
+
+    .service-page-link:hover {
+      color: #ffffff;
+    }
+
+    .cta-wrap {
+      margin-top: 2.75rem;
+      text-align: center;
+    }
+
+    .btn-red {
+      background-color: var(--accent-red);
+      color: #ffffff;
+      border: none;
+      padding: 0.9rem 2.25rem;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-red:hover {
+      background-color: #be123c;
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
 
@@ -35,7 +351,7 @@
       <div class="red-line"></div>
     </section>
 
-    <!-- Sección de Servicios -->
+    <!-- Sección de Servicios / Catálogo Dinámico -->
     <section class="services-section" id="servicios">
       <div class="divider-title">
         <span>Nuestros Servicios</span>
@@ -43,7 +359,11 @@
 
       <div class="services-row">
         <!-- Corte -->
-        <div class="service-item" data-service="Corte">
+        <div class="service-item" data-service="Corte" data-page="corte.html">
+          <span class="corner-tl" aria-hidden="true"></span>
+          <span class="corner-tr" aria-hidden="true"></span>
+          <span class="corner-bl" aria-hidden="true"></span>
+          <span class="corner-br" aria-hidden="true"></span>
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="6" cy="6" r="3"/>
@@ -57,7 +377,11 @@
         </div>
 
         <!-- Barba -->
-        <div class="service-item" data-service="Barba">
+        <div class="service-item" data-service="Barba" data-page="barba.html">
+          <span class="corner-tl" aria-hidden="true"></span>
+          <span class="corner-tr" aria-hidden="true"></span>
+          <span class="corner-bl" aria-hidden="true"></span>
+          <span class="corner-br" aria-hidden="true"></span>
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2a5 5 0 00-5 5v3a5 5 0 0010 0V7a5 5 0 00-5-2zm-3 8V7a3 3 0 016 0v3a3 3 0 01-6 0z"/>
@@ -68,7 +392,11 @@
         </div>
 
         <!-- Fade -->
-        <div class="service-item" data-service="Fade">
+        <div class="service-item" data-service="Fade" data-page="fade.html">
+          <span class="corner-tl" aria-hidden="true"></span>
+          <span class="corner-tr" aria-hidden="true"></span>
+          <span class="corner-bl" aria-hidden="true"></span>
+          <span class="corner-br" aria-hidden="true"></span>
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4a1 1 0 001.25 1.25l1.79-.62A8.94 8.94 0 0012 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16a7 7 0 110-14 7 7 0 010 14z"/>
@@ -78,7 +406,11 @@
         </div>
 
         <!-- Diseño -->
-        <div class="service-item" data-service="Diseño">
+        <div class="service-item" data-service="Diseño" data-page="diseno.html">
+          <span class="corner-tl" aria-hidden="true"></span>
+          <span class="corner-tr" aria-hidden="true"></span>
+          <span class="corner-bl" aria-hidden="true"></span>
+          <span class="corner-br" aria-hidden="true"></span>
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42-7.09 7.09c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0l7.09-7.09 1.42 1.42 1.41-1.41-1.91-1.93 3.12-3.12c.4-.39.4-1.03 0-1.42z"/>
@@ -102,7 +434,7 @@
       const serviceItems = document.querySelectorAll(".service-item");
       const btnReservar = document.getElementById("btnReservar");
 
-      // Selección y deselección visual de servicios
+      // Selección y deselección visual de servicios con esquinas marcadas
       serviceItems.forEach(item => {
         item.addEventListener("click", () => {
           item.classList.toggle("active");
